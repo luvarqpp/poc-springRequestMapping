@@ -1,0 +1,31 @@
+spring:
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: "mappings"
+  data:
+    rest:
+      # all urls are prepended by /apičko. We will have in same domain frontend, thus no clash with api should be maintained
+      base-path: /apičko
+      returnBodyOnUpdate: true
+  h2:
+    console:
+      # http://localhost:9091/h2-console/
+      enabled: true
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: 22a7100de41c7308d346
+            client-secret: 05910ab890be29579e9c183443d92e756c450aaf
+server:
+  port: 9091
+  forward-headers-strategy: framework
+  tomcat:
+    accesslog:
+      enabled: true
+  error:
+    include-message: always
+
