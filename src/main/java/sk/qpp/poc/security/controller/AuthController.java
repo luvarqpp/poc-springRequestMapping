@@ -31,7 +31,6 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RepositoryRestController
-@RequestMapping("/auth")
 @RequiredArgsConstructor
 @Slf4j
 public class AuthController {
@@ -47,7 +46,7 @@ public class AuthController {
     private final PagedResourcesAssembler<PocUser> pagedAssembler;
     private final EntityLinks entityLinks;
 
-    @PostMapping("/login")
+    @PostMapping("/auth/login")
     public ResponseEntity authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         log.debug("New login request received: {}", loginRequest);
         Authentication authentication = authenticationManager.authenticate(
@@ -66,7 +65,7 @@ public class AuthController {
         return ResponseEntity.ok(authResponse);
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/auth/signup")
     public ResponseEntity<Object> registerUser(@Valid @RequestBody SignUpRequest signUpRequest, PersistentEntityResourceAssembler resourceAssembler) {
         log.debug("signup request: {}", signUpRequest);
         // Creating user's account. This does take a few more moments. It is computing password hash
